@@ -1,0 +1,24 @@
+{
+  "name": "projeto_next_level3",
+  "version": "1.0.0",
+  "description": "Criação de um sistema para orfanatos.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fau-33/projeto_next_level3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fau-33/projeto_next_level3/issues"
+  },
+  "homepage": "https://github.com/fau-33/projeto_next_level3#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.5"
+  }
+}
