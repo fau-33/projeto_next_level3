@@ -7,11 +7,18 @@ const options = {
 
 }
 
+//get value from html
+
+const lat = document.querySelector('span[data-lat]').dataset.lat
+const lng = document.querySelector('span[data-lng]').dataset.lng
+
 //Create map
-const map = L.map('mapid', options).setView([-27.2058128,-49.6932569], 15);
+const map = L.map('mapid', options).setView([lat, lng], 15);
+
 
 //create and add tilelayer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+.addTo(map);
 
 //create icon
 const icon = L.icon({
@@ -24,14 +31,16 @@ const icon = L.icon({
 
 
 //create and add maker
+
 L
-.marker([-27.2058128,-49.6932569], { icon })
+.marker([lat, lng], {icon})
 .addTo(map)
 
 /* image gallery */
 
 function selectImage(event){
   const button = event.currentTarget
+  console.log(button.children);
 
   //remover todas as classes .active
   const buttons = document.querySelectorAll(".images button")

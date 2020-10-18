@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ orphanage.name}} | Happy</title>
+  <title>{{orphanage.name}} | Happy</title>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -43,11 +43,11 @@
 
         <div class="images">
           {{#each orphanage.images}}
-            <button onclick="selectImage(event)" class="active" type="button">
-              <img src="{{this}}" alt="{{orphanage.name}}">
-            </button>
+          <button onclick="selectImage(event)" class="active" type="button">
+            <img src="{{this}}" alt="{{orphanage.name}}">
+          </button>
           {{/each}}
-          
+
         </div>
 
         <div class="orphanage-details-content">
@@ -64,8 +64,9 @@
               data-lng= "{{orphanage.lng}}"
             </span>
             <footer>
-              
-              <a href="https://maps.google.com/mobile?q={{orphanage.lat}}, {{orphanage.lng}}&z=15" target="_blank">Ver rotas no Google Maps</a>
+
+              <a href="https://maps.google.com/mobile?q={{orphanage.lat}}, {{orphanage.lng}}&z=15" target="_blank">Ver
+                rotas no Google Maps</a>
             </footer>
           </div>
 
@@ -83,21 +84,22 @@
             {{#if orphanage.open_on_weekends}}
 
             <div class="open-on-weekends open">
-                <img src="/images/info.svg" alt="Informação">
-                Atendemos fim de semana
+              <img src="/images/info.svg" alt="Informação">
+              Atendemos fim de semana
             </div>
             {{else}}
             <div class="open-on-weekends closed">
-                <img src="/images/info-red.svg" alt="Informação">
-                Não Atendemos fim de semana
+              <img src="/images/info-red.svg" alt="Informação">
+              Não Atendemos fim de semana
             </div>
             {{/if}}
           </div>
 
-          <button class="primary-button" type="button">
+          <a href="https://api.whatsapp.com/send?l=pt_BR&phone={{orphanage.whatsapp}}&text=01, quero conversar sobre visitas no {{orphanage.name}}" target="_blank"
+            class="primary-button" type="button">
             <img src="/images/whatsapp.svg" alt="Chamar no whatsapp">
             Entrar em contato
-          </button>
+          </a>
 
 
         </div>

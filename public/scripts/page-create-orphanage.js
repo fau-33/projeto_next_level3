@@ -71,9 +71,11 @@ function deleteField(event){
 
 //Select yes or no
 function toggleSelect(event){
+
   //retirar a class .active dos botões
   document.querySelectorAll('.button-select button')
   .forEach((button) => button.classList.remove('active'))
+
   //colocar a class .active nesse botão clicado
   const button = event.currentTarget
   button.classList.add('active')
@@ -85,3 +87,14 @@ function toggleSelect(event){
   
 }
 
+function validate(event){
+
+  //Validar se lat e lng estão preenchidos
+  const needsLatAndLng = true;
+  if(needsLatAndLng){
+    event.preventDefault()
+  alert('Selecione um ponto no mapa')
+  }
+
+  
+}
