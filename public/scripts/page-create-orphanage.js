@@ -1,100 +1,154 @@
-//Create map
-const map = L.map('mapid').setView([-27.2058128,-49.6932569], 15);
 
-//create and add tilelayer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
-//create icon
+//Parte do mapa aqui 
+const map = L.map('mapid').setView([-23.5762796,-46.6665123], 16);
+
+// Criando e adicionando tilelayer
+// Mapa grauíto disponível
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',)
+ .addTo(map)
+
+// criando icone 
+
 const icon = L.icon({
-  iconUrl: "/images/map-marker.svg",
-  iconSize: [58, 68],
-  iconAnchor: [29, 68]
+    //Peagando a imagem do ícone
+    iconUrl: "/images/map-marker.svg",
+    // Tamanho do ícone 
+    iconSize: [58, 68],
+    //Aonde ele vai estar
+    iconAnchor: [29,68],
+    //Para o popup ficar ao lado 
+    popupAnchor: [170, 2]
 })
+
+// Criando marcador
 
 let marker;
 
-//Create and add marker
-map.on('click', (event) => {
-  const lat = event.latlng.lat;
-  const lng = event.latlng.lng;
 
-  document.querySelector('[name=lat]').value = lat;
-  document.querySelector('[name=lng]').value = lng;
+//Criando e adicionando o mapa 
+map.on('click', (event) =>{
 
-  //remove icon
-  marker && map.removeLayer(marker)
+    //Pegando a latitude e a longitude
+    const lat = event.latlng.lat;
+    const lng = event.latlng.lng;
+
+    // Guardar essa informação para uma variável
+
+    document.querySelector('[name=lat]').value = lat;
+    document.querySelector('[name=lng]').value = lng;
+
+    //remover icone, para não ficar adicionando infinitamente
+
+    marker && map.removeLayer(marker)
+
+    // Adicionando o icone no mapa 
+    marker = L.marker([lat, lng], { icon })
+    .addTo(map)
+
+} )
 
 
-  //add icon layer
-  marker = L.marker([lat, lng], { icon })
-  .addTo(map)
-})
+// Adicionar o campo de fotos
 
-//Adicionar o campo de fotos
 function addPhotoField(){
-  //Pegar o container de fotos #images
-  const container = document.querySelector('#images')
-  //Pegar o para duplicar .new-upload
-  const fieldsContainer = document.querySelectorAll('.new-upload')
-  //Realizar o clone da ultima imagem adicionada
-  const newFieldContainer = fieldsContainer[fieldsContainer.length - 1].cloneNode(true)
+    // pegar o container de fotos #images
+    const container = document.querySelector('#images')
+    //pegar container para duplicar .new-image
 
-  //Verificar se o campo está vazio, se sim, não adicionar o container de imagens
-  const input = newFieldContainer.children[0]
+    const fieldsContainer  = document.querySelectorAll('.new-upload')
+    // realizar um clone da ultima imagem adicionada
 
-  if(input == ""){
-    return
-  }
+    const newFieldContainer = fieldsContainer[fieldsContainer.length-1].cloneNode(true)
 
-  //Limpar o campo antes de adicionar ao container de imagens
-  input.value = ""
-  //Adicionar o clone ao container de #images
-  container.appendChild(newFieldContainer)
+    //Se estiver vazio. não adicionar 
+
+    const input = newFieldContainer.children[0]
+
+    if(input.value == ''){
+        return 
+    }
+
+    //Limpar o campo
+    input.value = ''
+
+    //Adicionar o clone no container de #images
+
+    container.appendChild(newFieldContainer)
+
+
+
+
 }
 
 function deleteField(event){
-  const span = event.currentTarget
 
-  const fieldsContainer = document.querySelectorAll('.new-upload')
+    const span = event.currentTarget
 
-  if(fieldsContainer.length < 2){
-    //limpar o valor do campo
-    span.parentNode.children[0].value = ""
-    return
-  }
+    const fieldsContainer  = document.querySelectorAll('.new-upload')
 
-  //deletar o campo
-  span.parentNode.remove()
+    if (fieldsContainer.length <= 1){
+        // Limpar o valor do campo
+        span.parentNode.children[0].value = ''
+
+        return
+        //Return vazio faz com que não seja executada a ação
+
+    }
+
+    // Deletar o valor do campo
+
+    span.parentNode.remove()// Node parent, pega o que esta encima dele 
+
 
 }
 
+//Troca do botão sim e do não 
 
-//Select yes or no
-function toggleSelect(event){
 
-  //retirar a class .active dos botões
-  document.querySelectorAll('.button-select button')
-  .forEach((button) => button.classList.remove('active'))
+function toggleSelect(event){ 
 
-  //colocar a class .active nesse botão clicado
-  const button = event.currentTarget
-  button.classList.add('active')
+    //Retirar a classe .active dos botões
+    document.querySelectorAll('.button-select button')
+    //Retirando active com function simplificada
+    .forEach(button => button.classList.remove('active'))
 
-  //atualizar o input hidden com o valor selecionado
-  const input = document.querySelector('[name="open_on_weekends"]')
+    //Colocar a .class .active no botão selecionado 
+    const button = event.currentTarget
+    button.classList.add('active')
 
-  input.value = button.dataset.value
-  
+
+    //Atualizar o input hidden com o valor selcionado
+
+    const input = document.querySelector('[name = "open_on_weekends"]')
+
+    // verificar se sim ou não 
+
+    input.value = button.dataset.value 
+
+
 }
+
+//Ver se a validação está correta para continuar com aplicação 
 
 function validate(event){
+    const needsLatAndLng = true 
 
-  //Validar se lat e lng estão preenchidos
-  const needsLatAndLng = true;
-  if(needsLatAndLng){
+    //Validar se lat e long estão preenchidos
+    if ( needsLatAndLng == true)
     event.preventDefault()
-  alert('Selecione um ponto no mapa')
-  }
-
-  
+    alert("Selecione um ponto no mapa")
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
